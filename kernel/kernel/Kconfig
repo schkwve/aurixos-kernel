@@ -1,0 +1,23 @@
+menu "Kernel"
+source "mm/Kconfig"
+
+config KPRINTF_BUFSIZE
+	prompt "Logging default buffer size"
+	int
+	default 16000
+	range 100 1000000
+
+config KPRINTF_LOGLEVEL
+	prompt "Logging Level"
+	int
+	default 4
+	range 0 5
+	help
+		0 = Fatal
+		1 = Critical
+		2 = Error
+		3 = Warning
+		4 = Info
+		5 = Debug
+
+endmenu

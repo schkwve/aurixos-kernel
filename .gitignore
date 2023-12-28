@@ -1,0 +1,16 @@
+.vscode
+*.o
+*.oc
+*.ocpp
+*.oasm
+*.onasm
+*.os
+*.oS
+
+kernel.bin
+/kernel/.config
+/kernel/symtab.s
+/kernel/config_gen
+/kernel/.config.old
+/kernel/include/config
+/kernel/include/generated

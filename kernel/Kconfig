@@ -1,0 +1,53 @@
+mainmenu "AurixOS $(KVERSION) ($(ARCH)) Kernel Configuration"
+
+menu "$(ARCH)-specific"
+source "arch/$(ARCH)/Kconfig"
+endmenu
+
+source "libs/Kconfig"
+source "kernel/Kconfig"
+
+config ARCH
+    string
+    default "$(ARCH)"
+
+config CXX
+    string
+    default "$(CXX)"
+
+config LD
+    string
+    default "$(LD)"
+
+config NM
+    string
+    default "$(NM)"
+
+config OBJCOPY
+    string
+    default "$(OBJCOPY)"
+
+config CFLAGS
+    string
+    default "$(CFLAGS)"
+
+config CXXFLAGS
+    string
+    default "$(CXXFLAGS)"
+
+config LDFLAGS
+    string
+    default "$(LDFLAGS)"    
+
+config KVERSION
+    string
+    default "$(KVERSION)"
+
+menu "Build Options"
+
+config C_OPTIM_LEVEL
+	prompt "GCC Optimization Level"
+	int
+	default 3
+	range 0 3
+endmenu
