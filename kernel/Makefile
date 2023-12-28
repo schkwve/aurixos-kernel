@@ -17,12 +17,8 @@ endif
 endif
 endef
 
-ifeq ($(CONFIG_ARCH),"x86")
-ifeq ($(CONFIG_ENABLE_KERNEL_64),y)
+ifeq ($(CONFIG_ARCH),"x86_64")
 CROSS_COMPILE=x86_64-elf-
-else
-CROSS_COMPILE=i686-elf-
-endif
 else ifeq ($(CONFIG_ARCH),"aarch64")
 CROSS_COMPILE=aarch64-elf-
 endif
@@ -77,6 +73,11 @@ all: syncconfig
 ifndef M
 	@$(MAKE) kernel
 endif
+
+.PHONY: install
+install: all
+	@mkdir -p $(SYSROOT)
+	@cp kernel.o $(SYSROOT)
 
 doxygen:
 	@doxygen

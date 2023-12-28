@@ -1,0 +1,6 @@
+override INT_CFLAGS += -nostdlib -fno-pie -mno-red-zone -ffreestanding -fno-exceptions -fno-stack-protector -mno-mmx -mno-sse -mno-sse2 -mcmodel=kernel
+override INT_CXXFLAGS += -nostdlib -fno-pie -mno-red-zone -ffreestanding -fno-exceptions -fno-stack-protector -mno-mmx -mno-sse -mno-sse2 -mcmodel=kernel
+
+%.onasm: %.asm
+	@echo "  NASM $<"
+	@nasm -f elf $< -o $@
