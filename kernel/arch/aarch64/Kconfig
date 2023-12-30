@@ -1,3 +1,14 @@
 config ARCH_AARCH64
   bool
   default y
+
+config UART_BAUD_RATE
+  prompt "UART Baud Rate"
+  int
+  default 115200
+
+config KPRINTF_BUFSIZE
+	prompt "Logging default buffer size"
+	int
+	default 16000
+	range 100 1000000

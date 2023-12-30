@@ -1,1 +1,1 @@
-obj-y += 
+obj-y += mmio.oc

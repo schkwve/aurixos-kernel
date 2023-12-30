@@ -1,2 +1,2 @@
 obj-d += prekernel
-obj-y += 
+obj-y += gpio.oc
