@@ -25,10 +25,31 @@ uint32_t gpio_call(uint32_t pin_number, uint32_t value, uint32_t base, uint32_t 
 	return 0;
 }
 
+void gpio_set_pin_output(uint32_t pin_number, uint32_t state)
+{
+	if (state) {
+		gpio_set(pin_number, 1);
+	} else {
+		gpio_clear(pin_number, 1);
+	}
+}
+
+void gpio_use_as_alt3(uint32_t pin_number)
+{
+	gpio_pull(pin_number, Pull_None);
+	gpio_function(pin_number, GPIO_FUNCTION_ALT3);
+;}
+
 void gpio_use_as_alt5(uint32_t pin_number)
 {
 	gpio_pull(pin_number, Pull_None);
 	gpio_function(pin_number, GPIO_FUNCTION_ALT5);
+}
+
+void gpio_init_output_with_pull_none(uint32_t pin_number)
+{
+	gpio_pull(pin_number, Pull_None);
+	gpio_function(pin_number, GPIO_FUNCTION_OUT);
 }
 
 uint32_t gpio_set(uint32_t pin_number, uint32_t value)
