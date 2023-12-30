@@ -3,7 +3,7 @@ set -e
 
 source .config
 
-ldscript="arch/x86_64/linker_64.ld"
+ldscript="arch/x86_64/linker.ld"
 ptrsize=".quad"
 
 ${INT_LD} ${INT_LDFLAGS} -T ${ldscript} kernel_partial.o -o kernel.o

@@ -1,8 +1,2 @@
 INT_AS := $(AS)
 INT_ASFLAGS := $(ASFLAGS)
-INT_LD := $(LD)
-INT_LDFLAGS := $(LDFLAGS)
-
-%.oS: %.S
-	@echo "  AS $<"
-	@$(INT_AS) $(INT_ASFLAGS) $< -o $@

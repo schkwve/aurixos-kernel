@@ -76,8 +76,8 @@ endif
 
 .PHONY: install
 install: all
-	@mkdir -p $(SYSROOT)
-	@cp kernel.o $(SYSROOT)
+	@mkdir -p $(SYSROOT_DIR)
+	@cp kernel.o $(SYSROOT_DIR)
 
 doxygen:
 	@doxygen
@@ -176,5 +176,6 @@ build_objs: $(OBJS)
 # use .WAIT when GNU Make 4.4 is finally common
 .PHONY: kernel
 kernel: | pre_build build_libs build_objs
+	@echo "  LD kernel.o"
 	@$(INT_LD) $(INT_LDFLAGS) -r $(OBJS) $(LIBS) -o kernel_partial.o
 	@./arch/$(BUILD_ARCH)/archlink.sh

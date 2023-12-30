@@ -1,3 +1,3 @@
-void _kentry()
+void kernel_init()
 {
 }
