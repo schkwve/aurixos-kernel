@@ -27,8 +27,11 @@ void uart_init(void);
 void uart_update(void);
 
 uint32_t uart_read_char(void);
-void uart_write_char(char c);
-void uart_write_string(char *buf);
+void uart_write_char_blocking_actual(char c);
+void uart_write_char_blocking(char c);
+
+void __uart_load_output_fifo();
+void __uart_drain_output_queue();
 
 uint32_t __uart_is_ready_to_read(void);
 uint32_t __uart_is_ready_to_write(void);
