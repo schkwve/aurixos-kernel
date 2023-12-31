@@ -1,5 +1,5 @@
-#include <arch/gpio.h>
-#include <arch/uart.h>
+#include <arch/io/gpio.h>
+#include <arch/io/uart.h>
 #include <mm/mmio.h>
 #include <sys/types.h>
 
@@ -33,14 +33,14 @@ void uart_init(void)
 
 void uart_update()
 {
-	uart_load_output_fifo();
+	__uart_load_output_fifo();
 
 	if (__uart_is_ready_to_read()) {
 		uint8_t c = uart_read_char();
 		if (c == '\r') {
-			uart_write_char('\n');
+			uart_write_char_blocking('\n');
 		} else {
-			uart_write_char(c);
+			uart_write_char_blocking(c);
 		}
 	}
 }
@@ -82,7 +82,7 @@ void uart_write_string(char *buf)
 void __uart_load_output_fifo()
 {
 	while (!__uart_is_out_queue_empty() && __uart_is_ready_to_write()) {
-		uart_write_char(uart_output_queue[uart_output_queue_read]);
+		uart_write_char_blocking_actual(uart_output_queue[uart_output_queue_read]);
 		uart_output_queue_read = (uart_output_queue_read + 1) & (UART_MAX_QUEUE - 1);
 	}
 }

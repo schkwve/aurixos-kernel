@@ -1,7 +1,7 @@
 #ifndef AARCH64_UART_H
 #define AARCH64_UART_H
 
-#include <arch/gpio.h>
+#include <arch/io/gpio.h>
 #include <sys/types.h>
 
 #define AUX_MU_BAUD(baud) (((AUX_UART_CLOCK) / ((baud) * 8)) - 1)

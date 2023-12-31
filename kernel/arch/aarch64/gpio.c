@@ -1,4 +1,4 @@
-#include <arch/gpio.h>
+#include <arch/io/gpio.h>
 #include <mm/mmio.h>
 
 uint32_t gpio_call(uint32_t pin_number, uint32_t value, uint32_t base, uint32_t field_size, uint32_t field_max)
@@ -38,7 +38,7 @@ void gpio_use_as_alt3(uint32_t pin_number)
 {
 	gpio_pull(pin_number, Pull_None);
 	gpio_function(pin_number, GPIO_FUNCTION_ALT3);
-;}
+}
 
 void gpio_use_as_alt5(uint32_t pin_number)
 {
