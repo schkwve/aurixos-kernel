@@ -7,7 +7,7 @@
  * AUTHOR:     Jozef Nagy                  DATE:    30 Dec 2023
  *
  * COPYRIGHT:
- *       Copyright (C) 2023  Jozef Nagy.
+ *       Copyright (C) 2023, 2024  Jozef Nagy.
  *
  *       This program is free software; you can redistribute it and/or
  *       modify it under the terms of the GNU General Public License
