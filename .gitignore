@@ -15,3 +15,5 @@ kernel.bin
 /kernel/.config.old
 /kernel/include/config
 /kernel/include/generated
+
+/release

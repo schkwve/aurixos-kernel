@@ -43,11 +43,6 @@ bootloader: | build_objs
 	@echo "  LD BOOTX64.EFI"
 	@$(INT_LD) $(INT_LDFLAGS) $(OBJS) -o boot.o
 
-.PHONY: install
-install: bootloader
-	@mkdir -p $(SYSROOT)/EFI/BOOT
-	@cp boot.o $(SYSROOT)/EFI/BOOT/BOOTX64.EFI
-
 .PHONY: clean
 clean:
 	@rm -rf *.o $(OBJS)

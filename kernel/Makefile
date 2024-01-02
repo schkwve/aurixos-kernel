@@ -74,11 +74,6 @@ ifndef M
 	@$(MAKE) kernel
 endif
 
-.PHONY: install
-install: all
-	@mkdir -p $(SYSROOT_DIR)
-	@cp kernel.o $(SYSROOT_DIR)
-
 doxygen:
 	@doxygen
 
