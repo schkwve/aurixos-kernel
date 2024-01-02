@@ -23,6 +23,14 @@
  *       along with this program; If not, see <http://www.gnu.org/licenses/>.
  **/
 
-void efi_main(void)
+#include <efi/efi.h>
+
+EFI_STATUS EFIAPI efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 {
+	(void)ImageHandle;
+	(void)SystemTable;
+
+	for (;;);
+
+	return EFI_SUCCESS;
 }
