@@ -25,6 +25,7 @@
 
 #include <efi/efi.h>
 
+#include <print.h>
 #include <global.h>
 
 EFI_STATUS EFIAPI efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
@@ -34,6 +35,9 @@ EFI_STATUS EFIAPI efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable
 
 	gSystemTable->ConOut->Reset(gSystemTable->ConOut, false);
 	gSystemTable->ConOut->ClearScreen(gSystemTable->ConOut);
+
+	CHAR16 *world = L"world";
+	print(L"Hello, %s!\r\n", world);
 
 	for (;;);
 

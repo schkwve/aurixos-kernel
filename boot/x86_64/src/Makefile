@@ -1,1 +1,1 @@
-obj-y += main.oc
+obj-y += main.oc print.oc

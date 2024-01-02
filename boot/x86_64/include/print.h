@@ -1,8 +1,8 @@
 /************************************************************************
- * FILENAME:         global.h
+ * FILENAME:         print.h
  *
  * DESCRIPTION:
- *       Global variables.
+ *       Printing and formatting functions forward declarations.
  *
  * AUTHOR:     Jozef Nagy                  DATE:    02 Jan 2024
  *
@@ -23,12 +23,14 @@
  *       along with this program; If not, see <http://www.gnu.org/licenses/>.
  **/
 
-#ifndef GLOBAL_H
-#define GLOBAL_H
+#ifndef PRINT_H
+#define PRINT_H
 
 #include <efi/efi.h>
 
-static EFI_SYSTEM_TABLE *gSystemTable = NULL;
-static EFI_HANDLE gImageHandle = NULL;
+void print(CHAR16 *fmt, ...);
 
-#endif /* GLOBAL_H */
+void __printint(INT32 num);
+void __printhex(UINTN num);
+
+#endif /* PRINT_H */
