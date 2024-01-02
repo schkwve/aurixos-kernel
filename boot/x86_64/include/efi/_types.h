@@ -37,7 +37,7 @@ typedef uint16_t UINT16;
 typedef uint32_t UINT32;
 typedef uint64_t UINT64;
 typedef uint64_t UINTN;
-typedef char16_t WCHAR;
+typedef char16_t CHAR16;
 typedef void VOID;
 
 typedef UINTN EFI_STATUS;

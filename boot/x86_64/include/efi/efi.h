@@ -38,7 +38,7 @@ typedef struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL;
 // Input Key
 typedef struct {
 	UINT16 ScanCode;
-	WCHAR UnicodeChar;
+	CHAR16 UnicodeChar;
 } EFI_INPUT_KEY;
 
 // EFI Table Header
@@ -73,7 +73,7 @@ typedef
 EFI_STATUS 
 (EFIAPI *EFI_TEXT_STRING)(
 	IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
-	IN WCHAR *String
+	IN CHAR16 *String
 );
 
 typedef 
