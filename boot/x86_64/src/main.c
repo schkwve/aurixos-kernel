@@ -25,10 +25,15 @@
 
 #include <efi/efi.h>
 
+#include <global.h>
+
 EFI_STATUS EFIAPI efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 {
-	(void)ImageHandle;
-	(void)SystemTable;
+	gImageHandle = ImageHandle;
+	gSystemTable = SystemTable;
+
+	gSystemTable->ConOut->Reset(gSystemTable->ConOut, false);
+	gSystemTable->ConOut->ClearScreen(gSystemTable->ConOut);
 
 	for (;;);
 
