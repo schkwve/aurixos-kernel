@@ -14,9 +14,6 @@ bootloader:
 	@echo "  AS boot.o"
 	@$(INT_AS) $(INT_ASFLAGS) -c src/boot.S -o boot.oS
 
-.PHONY: install
-install: bootloader
-
 .PHONY: clean
 clean:
 	@rm -rf boot.oS
