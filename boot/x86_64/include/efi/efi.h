@@ -27,6 +27,7 @@
 #ifndef EFI_H
 #define EFI_H
 
+#include "guid.h"
 #include "_types.h"
 
 // EFI Simple Text Input Protocol
@@ -34,6 +35,24 @@ typedef struct EFI_SIMPLE_TEXT_INPUT_PROTOCOL EFI_SIMPLE_TEXT_INPUT_PROTOCOL;
 
 // EFI Simple Text Output Protocol
 typedef struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL;
+
+// EFI Runtime Services
+typedef struct EFI_RUNTIME_SERVICES EFI_RUNTIME_SERVICES;
+
+// EFI System Table
+typedef struct EFI_SYSTEM_TABLE EFI_SYSTEM_TABLE;
+
+// EFI Simple Text Output Mode
+typedef struct {
+	INT32 MaxNode;
+
+	// Current settings
+	INT32 Mode;
+	INT32 Attribute;
+	INT32 CursorColumn;
+	INT32 CursorRow;
+	BOOLEAN CursorVisible;
+} SIMPLE_TEXT_OUTPUT_MODE;
 
 // Input Key
 typedef struct {
@@ -62,11 +81,28 @@ typedef enum {
  * FUNCTIONS          *
  **********************/
 
+typedef EFI_STATUS
+(EFIAPI *EFI_IMAGE_ENTRY_POINT)(
+	IN EFI_HANDLE ImageHandle,
+	IN EFI_SYSTEM_TABLE *SystemTable
+);
+
+// EFI Simple Text Input Protocol
+
 typedef 
 EFI_STATUS 
 (EFIAPI *EFI_INPUT_READ_KEY)(
-	IN  EFI_SIMPLE_TEXT_INPUT_PROTOCOL *This, 
+	IN EFI_SIMPLE_TEXT_INPUT_PROTOCOL *This, 
 	OUT EFI_INPUT_KEY *Key
+);
+
+// EFI Simple Text Output Protocol
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_TEXT_RESET)(
+	IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
+	IN BOOLEAN ExtendedVerification
 );
 
 typedef 
@@ -74,6 +110,29 @@ EFI_STATUS
 (EFIAPI *EFI_TEXT_STRING)(
 	IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
 	IN CHAR16 *String
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_TEXT_TEST_STRING)(
+	IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
+	IN CHAR16 *String
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_TEXT_QUERY_MODE)(
+	IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
+	IN UINTN ModeNumber,
+	OUT UINTN *Columns,
+	OUT UINTN *Rows
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_TEXT_SET_MODE)(
+	IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
+	IN UINTN ModeNumber
 );
 
 typedef 
@@ -84,10 +143,27 @@ EFI_STATUS
 );
 
 typedef 
-EFI_STATUS 
+EFI_STATUS
 (EFIAPI *EFI_TEXT_CLEAR_SCREEN)(
 	IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This
 );
+
+typedef 
+EFI_STATUS
+(EFIAPI *EFI_TEXT_SET_CURSOR_POSITION)(
+	IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
+	IN UINTN Column,
+	IN UINTN Row
+);
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_TEXT_ENABLE_CURSOR)(
+	IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
+	IN BOOLEAN Visible
+);
+
+// EFI Runtime Services
 
 typedef 
 VOID 
@@ -111,20 +187,20 @@ typedef struct EFI_SIMPLE_TEXT_INPUT_PROTOCOL {
 
 // EFI Simple Text Output Protocol
 typedef struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL {
-	void *Reset;
+	EFI_TEXT_RESET Reset;
 	EFI_TEXT_STRING OutputString;
-	void *TestString;
-	void *QueryMode;
-	void *SetMode;
+	EFI_TEXT_TEST_STRING TestString;
+	EFI_TEXT_QUERY_MODE QueryMode;
+	EFI_TEXT_SET_MODE SetMode;
 	EFI_TEXT_SET_ATTRIBUTE SetAttribute;
 	EFI_TEXT_CLEAR_SCREEN ClearScreen;
-	void *SetCursorPosition;
-	void *EnableCursor;
-	void *Mode;
+	EFI_TEXT_SET_CURSOR_POSITION SetCursorPosition;
+	EFI_TEXT_ENABLE_CURSOR EnableCursor;
+	SIMPLE_TEXT_OUTPUT_MODE *Mode;
 } EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL;
 
 // EFI Runtime Services
-typedef struct {
+typedef struct EFI_RUNTIME_SERVICES {
 	EFI_TABLE_HEADER Hdr;
 
 	// Time Services
@@ -155,7 +231,7 @@ typedef struct {
 } EFI_RUNTIME_SERVICES;
 
 // EFI System Table
-typedef struct {
+typedef struct EFI_SYSTEM_TABLE {
 	EFI_TABLE_HEADER Hdr;
 
 	void *FirmwareVendor;
